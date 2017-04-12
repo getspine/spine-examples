@@ -1,0 +1,17 @@
+---
+clusters:
+  - minecraft:
+      environment:
+        EULA: "TRUE"
+        INIT_MEMORY: 512M
+        MAX_MEMORY: 512M
+      image: itzg/minecraft-server
+      ports:
+        - port: 25565
+
+balancers:
+  - minecraft:
+      synapses:
+        - resource: minecraft
+          protocol: tcp
+          port: 25565

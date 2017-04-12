@@ -1,0 +1,31 @@
+---
+clusters:
+  - wordpress:
+      image: philcollins/wordpress
+      synapses:
+        - resource: wp-mariadb
+          port: 3306
+      environment:
+        DB_ENV_NAME: wordpress
+        DB_ENV_USER: spine
+        DB_ENV_PASS: spine
+        DB_HOST: "127.0.0.1:3306"
+        WP_DEBUG: "true"
+      ports:
+        - port: 80
+  - wp-mariadb:
+      image: mariadb
+      environment:
+        MYSQL_ROOT_PASSWORD: rkfienfvkisn039234uvfv98n
+        MYSQL_DATABASE: wordpress
+        MYSQL_USER: spine
+        MYSQL_PASSWORD: spine
+      ports:
+        - port: 3306
+
+balancers:
+  - wordpress:
+      synapses:
+        - resource: wordpress
+          protocol: http
+          port: 80

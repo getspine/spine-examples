@@ -1,0 +1,15 @@
+---
+clusters:
+  - 3d:
+      image: dmbfm/glsl-shader-editor
+      ports:
+        - port: 1337
+
+balancers:
+  - 3d:
+      enable_ssl: false
+      redirect_to_https: false
+      synapses:
+        - resource: 3d
+          protocol: http
+          remote_port: 1337

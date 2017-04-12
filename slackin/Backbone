@@ -1,0 +1,17 @@
+---
+clusters:
+  - slackin:
+      image: chk1/slackin
+      environment:
+        SLACK_ORG: your-slack-org
+        SLACK_TOKEN: "{{ vault.slackin_token }}"
+      ports:
+        - port: 3000
+
+balancers:
+  - slackin:
+      synapses:
+        - resource: slackin
+          protocol: http
+          port: 80
+          remote_port: 3000

@@ -1,0 +1,15 @@
+---
+clusters:
+  - humhub:
+      image: philcollins/humhub-docker
+      ports:
+        - port: 80
+
+balancers:
+  - humhub:
+      enable_ssl: false
+      redirect_to_https: false
+      synapses:
+        - resource: humhub
+          protocol: http
+          remote_port: 80

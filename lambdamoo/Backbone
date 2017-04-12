@@ -1,0 +1,14 @@
+---
+clusters:
+  - lambdamoo:
+      image: toddsundsted/lambdamoo
+      tag: 1.8.1
+      ports:
+        - port: 8888
+
+balancers:
+  - lambdamoo:
+      synapses:
+        - resource: lambdamoo
+          protocol: tcp
+          port: 8888

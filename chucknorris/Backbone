@@ -1,0 +1,13 @@
+---
+clusters:
+  - chucknorris:
+      image: mcpringle/chucknorris
+      ports:
+        - port: 80
+
+balancers:
+  - chucknorris:
+      synapses:
+        - resource: chucknorris
+          protocol: http
+          port: 80

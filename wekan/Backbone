@@ -1,0 +1,27 @@
+---
+clusters:
+  - wekanmongo:
+      image: mongo
+      tag: '3.0'
+      ports:
+        - port: 27017
+
+  - wekan:
+      image: mquandalle/wekan
+      nerves: 1
+      environment:
+        MONGO_URL: mongodb://127.0.0.1/
+        ROOT_URL: "https://wekan.{{ user.subdomain }}.spi.ne"
+      synapses:
+        - resource: wekanmongo
+          port: 27017
+      ports:
+        - port: 80
+
+balancers:
+  - wekan:
+      enable_ssl: true
+      synapses:
+        - resource: wekan
+          protocol: https
+          remote_port: 80

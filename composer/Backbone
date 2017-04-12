@@ -1,0 +1,14 @@
+---
+clusters:
+  - composer:
+      image: dallasmarlow/spine-composers
+      ports:
+        - port: 8080
+
+balancers:
+  - composer:
+      synapses:
+        - resource: composer
+          protocol: http
+          port: 80
+          remote_port: 8080

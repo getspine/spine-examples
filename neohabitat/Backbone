@@ -1,0 +1,57 @@
+---
+clusters:
+  - neohabitatmongo:
+      image: mongo
+      tag: "3.4.1"
+      ports:
+        - port: 27017
+
+  - neohabitatmariadb:
+      image: mariadb
+      environment:
+        MYSQL_ROOT_PASSWORD: rkfienfvkisn039234uvfv98n
+        MYSQL_DATABASE: qlink
+        MYSQL_USER: spine
+        MYSQL_PASSWORD: spine
+      ports:
+        - port: 3306
+
+  - neohabitat:
+      image: philcollins/neohabitat
+      environment:
+        NEOHABITAT_DEFAULT_CONTEXT: context-Downtown_5f
+        NEOHABITAT_MONGO_HOST: 127.0.0.1:27017
+        NEOHABITAT_SCHEMA_DIR: db
+        NEOHABITAT_SHOULD_ENABLE_DEBUGGER: "false"
+      synapses:
+        - resource: neohabitatmongo
+          port: 27017
+      ports:
+        - port: 1337
+        - port: 9000
+
+  - neohabitatqlink:
+      image: philcollins/qlink
+      environment:
+        QLINK_DB_HOST: 127.0.0.1
+        QLINK_DB_JDBC_URI: jdbc:mysql://127.0.0.1:3306/qlink
+        QLINK_DB_USERNAME: spine
+        QLINK_DB_PASSWORD: spine
+        QLINK_HABITAT_HOST: 127.0.0.1
+        QLINK_SHOULD_CREATE_DB: true
+        QLINK_SHOULD_PING: true
+      synapses:
+        - resource: neohabitat
+          port: 1337
+        - resource: neohabitatmariadb
+          port: 3306
+      ports:
+        - port: 5190
+
+balancers:
+  - neohabitat:
+      synapses:
+        - resource: neohabitatqlink
+          port: 5190
+        - resource: neohabitat
+          port: 1337

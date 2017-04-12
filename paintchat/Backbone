@@ -1,0 +1,13 @@
+---
+clusters:
+  - paintchat:
+      image: uzyexe/reichat
+      ports:
+        - port: 10133
+
+balancers:
+  - paintchat:
+      synapses:
+        - resource: paintchat
+          protocol: http
+          remote_port: 10133

@@ -1,0 +1,27 @@
+---
+clusters:
+  - rocketmongo:
+      image: mongo
+      tag: '3.4.1'
+      ports:
+        - port: 27017
+
+  - rocketchat:
+      image: rocket.chat
+      environment:
+        MONGO_URL: mongodb://127.0.0.1/
+        ROOT_URL: "https://rocket.{{ user.subdomain }}.spi.ne"
+      synapses:
+        - resource: rocketmongo
+          port: 27017
+      ports:
+        - port: 3000
+
+balancers:
+  - rocket:
+      enable_ssl: true
+      redirect_to_https: true
+      synapses:
+        - resource: rocketchat
+          protocol: https
+          remote_port: 3000

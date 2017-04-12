@@ -1,0 +1,32 @@
+---
+clusters:
+  - etherpad:
+      image: tvelocity/etherpad-lite
+      environment:
+        ETHERPAD_DB_HOST: 127.0.0.1
+        ETHERPAD_DB_NAME: etherpad
+        ETHERPAD_DB_PASSWORD: spine
+        ETHERPAD_DB_USER: spine
+      synapses:
+        - resource: ep-mariadb
+          port: 3306
+      port:
+        - port: 9001
+
+  - ep-mariadb:
+      image: mariadb
+      environment:
+        MYSQL_ROOT_PASSWORD: rkfienfvkisn039234uvfv98n
+        MYSQL_DATABASE: etherpad
+        MYSQL_USER: spine
+        MYSQL_PASSWORD: spine
+      ports:
+        - port: 3306
+
+balancers:
+  - etherpad:
+      synapses:
+        - resource: etherpad
+          protocol: http
+          port: 80
+          remote_port: 9001
