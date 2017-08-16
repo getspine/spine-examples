@@ -3,10 +3,10 @@ clusters:
   - etherpad:
       image: tvelocity/etherpad-lite
       environment:
-        ETHERPAD_DB_HOST: 127.0.0.1
-        ETHERPAD_DB_NAME: etherpad
-        ETHERPAD_DB_PASSWORD: spine
-        ETHERPAD_DB_USER: spine
+        - ETHERPAD_DB_HOST=127.0.0.1
+        - ETHERPAD_DB_NAME=etherpad
+        - "ETHERPAD_DB_PASSWORD={{ vault.etherpad_mysql_password }}"
+        - ETHERPAD_DB_USER=spine
       synapses:
         - resource: ep-mariadb
           port: 3306
@@ -16,10 +16,10 @@ clusters:
   - ep-mariadb:
       image: mariadb
       environment:
-        MYSQL_ROOT_PASSWORD: rkfienfvkisn039234uvfv98n
-        MYSQL_DATABASE: etherpad
-        MYSQL_USER: spine
-        MYSQL_PASSWORD: spine
+        - "MYSQL_ROOT_PASSWORD={{ vault.etherpad_mysql_root_password }}"
+        - MYSQL_DATABASE=etherpad
+        - MYSQL_USER=spine
+        - "MYSQL_PASSWORD={{ vault.etherpad_mysql_password }}"
       ports:
         - port: 3306
 

@@ -3,15 +3,16 @@ clusters:
   - slackin:
       image: chk1/slackin
       environment:
-        SLACK_ORG: your-slack-org
-        SLACK_TOKEN: "{{ vault.slackin_token }}"
+        SLACK_SUBDOMAIN: spinesupport
+        SLACK_API_TOKEN: "{{ vault.slackin_token }}"
       ports:
         - port: 3000
 
 balancers:
   - slackin:
+      enable_ssl: true
+      redirect_to_https: true
       synapses:
         - resource: slackin
-          protocol: http
-          port: 80
+          protocol: https
           remote_port: 3000

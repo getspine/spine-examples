@@ -9,20 +9,20 @@ clusters:
   - neohabitatmariadb:
       image: mariadb
       environment:
-        MYSQL_ROOT_PASSWORD: rkfienfvkisn039234uvfv98n
-        MYSQL_DATABASE: qlink
-        MYSQL_USER: spine
-        MYSQL_PASSWORD: spine
+        - "MYSQL_ROOT_PASSWORD={{ vault.neohabitat_mysql_root_password }}"
+        - MYSQL_DATABASE=qlink
+        - MYSQL_USER=neohabitat
+        - "MYSQL_PASSWORD={{ vault.neohabitat_mysql_password }}"
       ports:
         - port: 3306
 
   - neohabitat:
       image: philcollins/neohabitat
       environment:
-        NEOHABITAT_DEFAULT_CONTEXT: context-Downtown_5f
-        NEOHABITAT_MONGO_HOST: 127.0.0.1:27017
-        NEOHABITAT_SCHEMA_DIR: db
-        NEOHABITAT_SHOULD_ENABLE_DEBUGGER: "false"
+        - NEOHABITAT_DEFAULT_CONTEXT=context-Downtown_5f
+        - NEOHABITAT_MONGO_HOST=127.0.0.1:27017
+        - NEOHABITAT_SCHEMA_DIR=db
+        - NEOHABITAT_SHOULD_ENABLE_DEBUGGER=false
       synapses:
         - resource: neohabitatmongo
           port: 27017
@@ -33,13 +33,13 @@ clusters:
   - neohabitatqlink:
       image: philcollins/qlink
       environment:
-        QLINK_DB_HOST: 127.0.0.1
-        QLINK_DB_JDBC_URI: jdbc:mysql://127.0.0.1:3306/qlink
-        QLINK_DB_USERNAME: spine
-        QLINK_DB_PASSWORD: spine
-        QLINK_HABITAT_HOST: 127.0.0.1
-        QLINK_SHOULD_CREATE_DB: true
-        QLINK_SHOULD_PING: true
+        - QLINK_DB_HOST=127.0.0.1
+        - QLINK_DB_JDBC_URI=jdbc:mysql://127.0.0.1:3306/qlink
+        - QLINK_DB_USERNAME=neohabitat
+        - "QLINK_DB_PASSWORD={{ vault.neohabitat_mysql_password }}"
+        - QLINK_HABITAT_HOST=127.0.0.1
+        - QLINK_SHOULD_CREATE_DB=true
+        - QLINK_SHOULD_PING=true
       synapses:
         - resource: neohabitat
           port: 1337

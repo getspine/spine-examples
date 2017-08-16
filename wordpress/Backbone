@@ -2,24 +2,30 @@
 clusters:
   - wordpress:
       image: philcollins/wordpress
+      nerve_type: small
       synapses:
         - resource: wp-mariadb
           port: 3306
       environment:
-        DB_ENV_NAME: wordpress
-        DB_ENV_USER: spine
-        DB_ENV_PASS: spine
-        DB_HOST: "127.0.0.1:3306"
-        WP_DEBUG: "true"
+        - DB_ENV_NAME=wordpress
+        - DB_ENV_USER=spine
+        - "DB_ENV_PASS={{ vault.wordpress_mysql_password }}"
+        - DB_HOST=127.0.0.1:3306
+        - WP_DEBUG=true
       ports:
         - port: 80
+
   - wp-mariadb:
       image: mariadb
+      nerve_type: small
       environment:
-        MYSQL_ROOT_PASSWORD: rkfienfvkisn039234uvfv98n
-        MYSQL_DATABASE: wordpress
-        MYSQL_USER: spine
-        MYSQL_PASSWORD: spine
+        - "MYSQL_ROOT_PASSWORD={{ vault.wordpress_mysql_root_password }}"
+        - MYSQL_DATABASE=wordpress
+        - MYSQL_USER=spine
+        - "MYSQL_PASSWORD={{ vault.wordpress_mysql_password }}"
+      volumes:
+        - mount_location: /var/lib/mysql
+          size_gb: 10
       ports:
         - port: 3306
 

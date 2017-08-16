@@ -7,8 +7,6 @@ clusters:
 
 balancers:
   - 3d:
-      enable_ssl: false
-      redirect_to_https: false
       synapses:
         - resource: 3d
           protocol: http
