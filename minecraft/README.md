@@ -17,6 +17,6 @@ spine deploy
 
 3. Click **Direct Connect**.
 
-4. Enter ```minecraft.<your subdomain>.spi.ne``` into the **Server Address** field.
+4. Enter ```minecraft-<your subdomain>.spi.ne``` into the **Server Address** field.
 
 5. Click **Join Server**.

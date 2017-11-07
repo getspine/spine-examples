@@ -24,4 +24,4 @@ spine vault add slackin_token your-slack-token
 spine deploy
 ```
 
-5. Visit ```http://slackin.<your subdomain>.spi.ne```
+5. Visit ```http://slackin-<your subdomain>.spi.ne```

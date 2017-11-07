@@ -15,5 +15,5 @@ spine deploy
 2. Telnet to your new LambdaMOO server:
 
 ```
-telnet lambdamoo.<your subdomain>.spi.ne 8888
+telnet lambdamoo-<your subdomain>.spi.ne 8888
 ```

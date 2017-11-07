@@ -1,3 +1,7 @@
+<p align="center">
+  <img src="https://spi.ne/static/logo_small.png" alt="Spine Logo">
+</p>
+
 Spine Examples
 ==============
 
@@ -77,7 +81,7 @@ clusters:
       nerve_type: large
       volumes:
         - mount_location: /data/db
-          size_gb: 1024
+          size_gb: 100
       ports:
         - port: 27017
 ```
@@ -87,7 +91,7 @@ clusters:
 The more microservices you run, the more complex it becomes to maintain reliable
 communications between them. Synapses make it easy to solve this painful issue and are
 based upon advanced routing technologies such as
-[Finagle](https://twitter.github.io/finagle/).
+[HAProxy](http://www.haproxy.org/).
 
 This snippet uses a Synapse to connect the [Rocket Chat](https://rocket.chat/) cluster we
 created above to our giant Mongo database, powered by a Volume.
@@ -200,6 +204,17 @@ If you'd like to take a look at the container logs, use the ```spine cluster log
 
 ```
 # spine cluster logs etherpad
+0 - 2017-03-21T02:44:27.508Z: Started Etherpad...
+0 - 2017-03-21T02:44:27.709Z: [2017-03-21 02:44:27.705] [WARN] console - Declaring the sessionKey in the settings.json is deprecated. This value is auto-generated now. Please remove the setting from the file.
+0 - 2017-03-21T02:44:28.945Z: [2017-03-21 02:44:28.937] [INFO] console - Installed plugins:
+0 - 2017-03-21T02:44:28.962Z: [2017-03-21 02:44:28.952] [WARN] console - Can't get git version for server header
+0 - 2017-03-21T02:44:28.963Z: [2017-03-21 02:44:28.952] [INFO] console - Report bugs at https://github.com/ether/etherpad-lite/issues
+```
+
+Following logs is just as easy, just append a ```-f```:
+
+```
+# spine cluster logs -f etherpad
 0 - 2017-03-21T02:44:27.508Z: Started Etherpad...
 0 - 2017-03-21T02:44:27.709Z: [2017-03-21 02:44:27.705] [WARN] console - Declaring the sessionKey in the settings.json is deprecated. This value is auto-generated now. Please remove the setting from the file.
 0 - 2017-03-21T02:44:28.945Z: [2017-03-21 02:44:28.937] [INFO] console - Installed plugins:

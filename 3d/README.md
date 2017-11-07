@@ -12,4 +12,4 @@ How to Run
 spine deploy
 ```
 
-2. Visit ```http://3d.<your subdomain>.spi.ne```
+2. Visit ```http://3d-<your subdomain>.spi.ne```

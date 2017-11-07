@@ -13,4 +13,4 @@ How to Run
 spine deploy
 ```
 
-2. Visit ```http://humhub.<your subdomain>.spi.ne```
+2. Visit ```http://humhub-<your subdomain>.spi.ne```

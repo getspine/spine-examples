@@ -20,4 +20,4 @@ spine vault add etherpad_mysql_root_password $(openssl rand -base64 32)
 spine deploy
 ```
 
-3. Visit ```http://etherpad.<your subdomain>.spi.ne```
+3. Visit ```http://etherpad-<your subdomain>.spi.ne```

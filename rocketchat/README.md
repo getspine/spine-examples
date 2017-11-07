@@ -15,4 +15,4 @@ spine deploy
 
 **PLEASE NOTE**: This deployment requests a Let's Encrypt certificate, which will make the initial Balancer deploy take longer than usual.
 
-2. Visit ```https://rocket.<your subdomain>.spi.ne```
+2. Visit ```https://rocket-<your subdomain>.spi.ne```
