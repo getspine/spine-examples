@@ -24,7 +24,7 @@ container scaling and deployment experience, so we've built the industry's most 
 and easy-to-use platform for hosting containerized applications.
 
 Spine is currently an invitation-only service. Please sign up for the alpha at
-https://spi.ne/ to receive your installation instructions.
+https://spi.ne/signup to receive your installation instructions.
 
 How Spine Works
 ---------------
