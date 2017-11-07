@@ -2,15 +2,14 @@
 clusters:
   - rocketmongo:
       image: mongo
-      nerve_type: small
       tag: '3.4.1'
       ports:
         - port: 27017
+
   - rocketchat:
       image: rocket.chat
-      nerve_type: small
       environment:
-        - MONGO_URL=mongodb://127.0.0.1/
+        - MONGO_URL=mongodb://rocketmongo/
         - "ROOT_URL=https://rocket-{{ user.subdomain }}.spi.ne"
       synapses:
         - resource: rocketmongo
@@ -22,7 +21,6 @@ balancers:
   - rocket:
       enable_ssl: true
       redirect_to_https: true
-      nerve_type: small
       synapses:
         - resource: rocketchat
           protocol: https

@@ -3,17 +3,20 @@ clusters:
   - wekanmongo:
       image: mongo
       tag: '3.0'
+      volumes:
+        - mount_location: /data/db
+          size_gb: 10
       ports:
         - port: 27017
 
   - wekan:
       image: mquandalle/wekan
-      nerves: 1
       environment:
-        - MONGO_URL=mongodb://127.0.0.1/
-        - "ROOT_URL=https://wekan.{{ user.subdomain }}.spi.ne"
+        - MONGO_URL=mongodb://wekanmongo/
+        - "ROOT_URL=https://wekan-{{ user.subdomain }}.spi.ne"
       synapses:
         - resource: wekanmongo
+          protocol: tcp
           port: 27017
       ports:
         - port: 80

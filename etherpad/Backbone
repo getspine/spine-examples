@@ -3,7 +3,7 @@ clusters:
   - etherpad:
       image: tvelocity/etherpad-lite
       environment:
-        - ETHERPAD_DB_HOST=127.0.0.1
+        - ETHERPAD_DB_HOST=ep-mariadb
         - ETHERPAD_DB_NAME=etherpad
         - "ETHERPAD_DB_PASSWORD={{ vault.etherpad_mysql_password }}"
         - ETHERPAD_DB_USER=spine
@@ -20,6 +20,9 @@ clusters:
         - MYSQL_DATABASE=etherpad
         - MYSQL_USER=spine
         - "MYSQL_PASSWORD={{ vault.etherpad_mysql_password }}"
+      volumes:
+        - mount_location: /var/lib/mysql
+          size_gb: 10
       ports:
         - port: 3306
 

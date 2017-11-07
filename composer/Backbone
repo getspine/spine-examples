@@ -10,5 +10,4 @@ balancers:
       synapses:
         - resource: composer
           protocol: http
-          port: 80
           remote_port: 8080

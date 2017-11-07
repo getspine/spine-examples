@@ -3,6 +3,9 @@ clusters:
   - neohabitatmongo:
       image: mongo
       tag: "3.4.1"
+      volumes:
+        - mount_location: /data/db
+          size_gb: 10
       ports:
         - port: 27017
 
@@ -13,6 +16,9 @@ clusters:
         - MYSQL_DATABASE=qlink
         - MYSQL_USER=neohabitat
         - "MYSQL_PASSWORD={{ vault.neohabitat_mysql_password }}"
+      volumes:
+        - mount_location: /var/lib/mysql
+          size_gb: 10
       ports:
         - port: 3306
 
@@ -20,7 +26,7 @@ clusters:
       image: philcollins/neohabitat
       environment:
         - NEOHABITAT_DEFAULT_CONTEXT=context-Downtown_5f
-        - NEOHABITAT_MONGO_HOST=127.0.0.1:27017
+        - NEOHABITAT_MONGO_HOST=neohabitatmongo:27017
         - NEOHABITAT_SCHEMA_DIR=db
         - NEOHABITAT_SHOULD_ENABLE_DEBUGGER=false
       synapses:
@@ -33,11 +39,11 @@ clusters:
   - neohabitatqlink:
       image: philcollins/qlink
       environment:
-        - QLINK_DB_HOST=127.0.0.1
-        - QLINK_DB_JDBC_URI=jdbc:mysql://127.0.0.1:3306/qlink
+        - QLINK_DB_HOST=neohabitatmariadb
+        - QLINK_DB_JDBC_URI=jdbc:mysql://neohabitatmariadb:3306/qlink
         - QLINK_DB_USERNAME=neohabitat
         - "QLINK_DB_PASSWORD={{ vault.neohabitat_mysql_password }}"
-        - QLINK_HABITAT_HOST=127.0.0.1
+        - QLINK_HABITAT_HOST=neohabitat
         - QLINK_SHOULD_CREATE_DB=true
         - QLINK_SHOULD_PING=true
       synapses:

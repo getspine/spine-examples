@@ -7,8 +7,6 @@ clusters:
 
 balancers:
   - humhub:
-      enable_ssl: false
-      redirect_to_https: false
       synapses:
         - resource: humhub
           protocol: http

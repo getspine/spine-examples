@@ -6,6 +6,9 @@ clusters:
         - EULA=TRUE
         - INIT_MEMORY=512M
         - MAX_MEMORY=512M
+      volumes:
+        - mount_location: /data
+          size_gb: 10
       ports:
         - port: 25565
 

@@ -7,10 +7,17 @@ This is the popular [Wordpress](https://wordpress.com/) blogging application, ba
 How to Run
 ==========
 
-1. Deploy the Backbone file:
+1. Add necessary credentials to the Vault:
+
+```
+spine vault add wordpress_mysql_password $(openssl rand -base64 32)
+spine vault add wordpress_mysql_root_password $(openssl rand -base64 32)
+```
+
+2. Deploy the Backbone file:
 
 ```
 spine deploy
 ```
 
-2. Visit ```http://wordpress.<your subdomain>.spi.ne```
+3. Visit ```http://wordpress.<your subdomain>.spi.ne```

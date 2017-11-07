@@ -2,7 +2,7 @@
 clusters:
   - lambdamoo:
       image: toddsundsted/lambdamoo
-      nerve_type: small
+      nerve_type: developer
       tag: 1.8.1
       ports:
         - port: 8888
