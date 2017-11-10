@@ -7,20 +7,13 @@ This launches the [Neoclassical Habitat](http://neohabitat.org) server, a recrea
 How to Run
 ----------
 
-1. Add necessary credentials to the Vault:
-
-```
-spine vault add neohabitat_mysql_password $(openssl rand -base64 32)
-spine vault add neohabitat_mysql_root_password $(openssl rand -base64 32)
-```
-
-2. Deploy the Backbone file:
+1. Deploy the Backbone file:
 
 ```
 spine deploy
 ```
 
-3. Follow the client setup instructions in the official Getting Started guide:
+2. Follow the client setup instructions in the official Getting Started guide:
 
 https://github.com/frandallfarmer/neohabitat
 

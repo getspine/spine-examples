@@ -2,8 +2,11 @@
 clusters:
   - 3d:
       image: dmbfm/glsl-shader-editor
+      nerve_type: mini
       ports:
         - port: 1337
+          healthcheck:
+            type: tcp
 
 balancers:
   - 3d:
